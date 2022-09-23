@@ -8,6 +8,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
+import com.example.workoutlog.Util.Constants
 import com.example.workoutlog.databinding.ActivityLoginBinding
 import com.example.workoutlog.models.LoginRequest
 import com.example.workoutlog.models.LoginResponse
@@ -23,7 +24,7 @@ class LoginActivity : AppCompatActivity() {
         binding=ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        sharedPrefs=getSharedPreferences("WORKOUTLOG_PREFS", MODE_PRIVATE)
+        sharedPrefs=getSharedPreferences(Constants.prefesFile, MODE_PRIVATE)
 
         binding.btnLogin.setOnClickListener {
             val intent=Intent(this, HomeActivity::class.java)
@@ -78,9 +79,10 @@ class LoginActivity : AppCompatActivity() {
 
     fun saveLoginDetails(LoginResponse: LoginResponse){
         val editor= sharedPrefs.edit()
-        editor.putString("ACCESS_TOKEN", LoginResponse.accessToken)
-        editor.putString("USER_ID",LoginResponse.userId)
-        editor.putString("PROFILE_ID",LoginResponse.profileId)
+        var token="Bearer ${LoginResponse.accessToken}"
+        editor.putString(Constants.prefesFile, LoginResponse.accessToken)
+        editor.putString(Constants.prefesFile,LoginResponse.userId)
+        editor.putString(Constants.prefesFile,LoginResponse.profileId)
         editor.apply()
     }
 }

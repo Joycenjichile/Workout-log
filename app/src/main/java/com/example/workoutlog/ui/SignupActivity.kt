@@ -57,7 +57,7 @@ class SignupActivity : AppCompatActivity() {
         if (phone.isBlank()) {
             error =true
             binding.tilPassword.error = "password_required"
-        }
+
         if (confirm.isBlank()) {
             error =true
             binding.tilConfirmPassword.error = "confirmpassword_required"
@@ -73,7 +73,7 @@ class SignupActivity : AppCompatActivity() {
         }
     }
 
-    override fun onResume() {
+      fun onResume() {
         super.onResume()
         userViewModel.registerResponseLiveData.observe(this, Observer {
                 signupResponse->
@@ -85,5 +85,5 @@ class SignupActivity : AppCompatActivity() {
                 signupError->
             Toast.makeText(baseContext,signupError,Toast.LENGTH_LONG).show()
         })
-    }
+    }}
 }

@@ -6,6 +6,8 @@ import com.example.workoutlog.models.RegisterRequest
 import com.example.workoutlog.models.RegisterResponse
 import retrofit2.Response
 import retrofit2.http.Body
+import retrofit2.http.GET
+import retrofit2.http.Header
 import retrofit2.http.POST
 
 interface ApiInterface {
@@ -14,4 +16,6 @@ interface ApiInterface {
 
     @POST("/Login")
     suspend fun login (@Body LoginRequest: LoginRequest): Response<LoginResponse>
+    @GET("/exercises-category")
+    suspend fun fetchExeciseCategories(@Header("Authorization")accessToken:String): Response<List<Exercisecatergory>>
 }
